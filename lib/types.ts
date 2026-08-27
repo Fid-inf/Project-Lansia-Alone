@@ -1,27 +1,42 @@
-export type GameTab = "memory" | "reaction"
+export type GameTab = "memory" | "reaction" | "steady"
 
 export type SessionEventType =
   | "memory_match"
   | "memory_mismatch"
   | "memory_complete"
+  | "memory_level_up"
+  | "memory_preview"
   | "reaction_hit"
   | "reaction_miss"
+  | "steady_start"
+  | "steady_point"
+  | "steady_error"
+  | "steady_complete"
 
 export interface SessionEvent {
   type: SessionEventType
   game: GameTab
   timestamp: number
-  /** Reaction time in milliseconds (reaction_hit events only). */
+  level?: number
+  x?: number
+  y?: number
   reactionMs?: number
+  movementMs?: number
+  deviation?: number
+  jitter?: number
+  error?: string
 }
 
 export interface DerivedMetrics {
-  lastReaction: number | null
+  currentLevel: number
   avgReaction: number | null
-  bestReaction: number | null
+  pathRmse: number | null
+  hitAccuracy: number | null
   hits: number
   misses: number
-  precisionRate: number | null
-  memoryRounds: number
   totalRounds: number
+  memoryErrors: number
+  trajectory: Array<{ x: number; y: number }>
 }
+
+export type LogEvent = (event: SessionEvent) => void
