@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Base accessible theme (default) */
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-2: #334155;
+  --color-border: #475569;
+  --color-foreground: #ffffff;
+  --color-muted: #cbd5e1;
+  --color-primary: #facc15;
+  --color-primary-foreground: #0f172a;
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
+
+  --radius: 1rem;
+}
+
+html {
+  background-color: var(--color-background);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* High Contrast Mode — pure black/white/yellow, thicker borders */
+.hc {
+  --color-background: #000000;
+  --color-surface: #000000;
+  --color-surface-2: #111111;
+  --color-border: #ffffff;
+  --color-foreground: #ffffff;
+  --color-muted: #ffffff;
+  --color-primary: #ffe600;
+  --color-primary-foreground: #000000;
+  --color-success: #00ff66;
+  --color-danger: #ff2e2e;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-pop {
+  animation: pop 0.35s ease;
+}
