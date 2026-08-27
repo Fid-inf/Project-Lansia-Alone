@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`bg-background ${inter.className}`}>
+    <html lang="id" className={`bg-background ${inter.className}`}>
       <body className="bg-background text-foreground antialiased">{children}</body>
     </html>
   )
