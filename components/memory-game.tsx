@@ -12,12 +12,14 @@ export function MemoryGame({ onEvent, audioGuide }: { onEvent: LogEvent; audioGu
   const [matched, setMatched] = useState<number[]>([])
   const pairs = Math.min(2 + level, 6)
   const cols = pairs <= 2 ? 2 : pairs <= 3 ? 3 : 4
-  const [deck, setDeck] = useState<string[]>(() => makeDeck(3))
+  const [deck, setDeck] = useState<string[]>(() => makeDeck(3, false))
   const isPreviewing = !ready && preview > 0
 
-  function makeDeck(pairCount: number) {
-    return [...Array.from({ length: pairCount }, (_, i) => SHAPES[i]), ...Array.from({ length: pairCount }, (_, i) => SHAPES[i])].sort(() => Math.random() - 0.5)
+  function makeDeck(pairCount: number, shuffle = true) {
+    const cards = [...Array.from({ length: pairCount }, (_, i) => SHAPES[i]), ...Array.from({ length: pairCount }, (_, i) => SHAPES[i])]
+    return shuffle ? cards.sort(() => Math.random() - 0.5) : cards
   }
+
 
   useEffect(() => {
     if (!ready && preview > 0) {
@@ -71,6 +73,3 @@ export function MemoryGame({ onEvent, audioGuide }: { onEvent: LogEvent; audioGu
   </section>
 }
 
-function makeDeck(pairCount: number) {
-  return [...Array.from({ length: pairCount }, (_, i) => SHAPES[i]), ...Array.from({ length: pairCount }, (_, i) => SHAPES[i])].sort(() => Math.random() - 0.5)
-}
